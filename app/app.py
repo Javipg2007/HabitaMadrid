@@ -1,7 +1,8 @@
 import streamlit as st
 import pandas as pd
+import os
 
-# Configuración de página
+# Configuración de la página
 st.set_page_config(
     page_title="HabitaMadrid",
     page_icon="🏠",
@@ -15,12 +16,20 @@ st.write(
     "Sistema de recomendación de municipios de la Comunidad de Madrid."
 )
 
-# Leer dataset
-df = pd.read_csv("../data/habitamadrid_dataset_final.csv")
+# Ruta al CSV
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# Mostrar datos
-st.subheader("Dataset")
+csv_path = os.path.join(
+    BASE_DIR,
+    "data",
+    "habitamadrid_dataset_final.csv"
+)
 
+# Leer CSV
+df = pd.read_csv(csv_path)
+
+# Mostrar dataset
+st.subheader("Dataset completo")
 st.dataframe(df)
 
 # Ranking
